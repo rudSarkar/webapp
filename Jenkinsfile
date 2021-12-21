@@ -23,6 +23,7 @@ pipeline {
 
         stage('Check Git Secrets') {
             steps {
+                sh 'docker run -v /var/run/docker.sock:/var/run/docker.sock -ti docker'
                 sh 'docker pull gesellix/trufflehog'
                 sh 'docker run -t gesellix/trufflehog --json https://github.com/rudSarkar/webapp/ > trufflehog'
             }
